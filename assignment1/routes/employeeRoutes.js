@@ -84,7 +84,7 @@ router.delete('/emp/employees/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Model.findByIdAndDelete(id)
-        res.status(200).json({message: "Employee deleted successfully"});
+        res.status(202).json({message: "Employee deleted successfully"});
 
     }
     catch (error) {
