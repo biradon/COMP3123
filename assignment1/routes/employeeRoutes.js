@@ -38,17 +38,27 @@ router.get('/emp/employees/:id', async (req, res) => {
 
 // Create employee
 router.post(
-    '/emp/employees', async (req, res) => {
-    const data = new Model({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        position: req.body.position,
-        salary: req.body.salary,
-        date_of_joining: req.body.date_of_joining,
-        department: req.body.department,
-        created_at: date,
-        updated_at: date
+    '/emp/employees', 
+    body('first_name', 'First name doest not empty').not().isEmpty(),
+    body('last_name', 'Last name doest not empty').not().isEmpty(),
+    body('email', 'Invalid email').isEmail(),
+    body('position', 'Position name doest not empty').not().isEmpty(),
+    body('salary', 'Must be number').isAlphanumeric(),
+    async (req, res) => {
+        const result = validationResult(req)
+        if(!result.isEmpty()) {
+            return res.status(422).json({status: "false", errors: result.array()})
+        }
+        const data = new Model({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            position: req.body.position,
+            salary: req.body.salary,
+            date_of_joining: req.body.date_of_joining,
+            department: req.body.department,
+            created_at: date,
+            updated_at: date
     })
 
     try {

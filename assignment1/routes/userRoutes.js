@@ -14,8 +14,15 @@ const Model = require('../models/userModel');
 // User signup
 router.post(
     '/signup',
+    body('username', 'The minimum username length is 6 characters').isLength({min: 6}),
+    body('email', 'Invalid email').isEmail(),
+    body('password', 'The minimum password length is 6 characters').isLength({min: 6}),
     async (req, res) => {
         try {
+            const result = validationResult(req)
+            if(!result.isEmpty()) {
+                return res.status(422).json({status: "false", errors: result.array()})
+            }
             const data =  new Model ({
                 username: req.body.username,
                 email: req.body.email,
@@ -36,8 +43,14 @@ router.post(
 
 router.post(
     '/login',
+    body('username', 'Username does not empty').not().isEmpty(),
+    body('password', 'Password does not empty').not().isEmpty(),
     async (req, res) => {
         try {
+            const result = validationResult(req)
+            if(!result.isEmpty()) {
+                return res.status(422).json({status: "false", errors: result.array()})
+            }
             const { username, password } = req.body;
             const user = await Model.findOne({username})
             if(!user) {
