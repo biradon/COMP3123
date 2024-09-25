@@ -71,7 +71,9 @@ router.post(
 })
 
 // Upate employee info
-router.put('/emp/employees/:id', async (req, res) => {
+router.put(
+    '/emp/employees/:id',
+    async (req, res) => {
     try {
         const id = req.params.id;
         req.body.updated_at = date;
@@ -98,6 +100,6 @@ router.delete('/emp/employees/:id', async (req, res) => {
 
     }
     catch (error) {
-        res.status(400).json({ status: "false", message: error.message })
+        res.status(400).json({ status: "false", message: "Something wrong, please try again" })
     }
 })
