@@ -19,7 +19,7 @@ router.get(
             res.json(data)
         }
         catch(error){
-            res.status(500).json({message: error.message})
+            res.status(500).json({status: "false", message: error.message})
         }
     }
 )
@@ -31,7 +31,7 @@ router.get('/emp/employees/:id', async (req, res) => {
         res.json(data)
     }
     catch(error){
-        res.status(500).json({message: error.message})
+        res.status(500).json({status: "false", message: error.message})
     }
 })
 
@@ -56,7 +56,7 @@ router.post(
         res.status(201).json({message: "Employee create successfully", employee_id: dataToSave.id});
     }
     catch (error) {
-        res.status(400).json({message: error.message})
+        res.status(400).json({status: "false", message: error.message})
     }
 })
 
@@ -75,7 +75,7 @@ router.put('/emp/employees/:id', async (req, res) => {
         res.status(200).json({message: "Employee details updated successfully"});
     }
     catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ status: "false", message: error.message })
     }
 })
 
@@ -88,6 +88,6 @@ router.delete('/emp/employees/:id', async (req, res) => {
 
     }
     catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ status: "false", message: error.message })
     }
 })

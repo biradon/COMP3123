@@ -18,9 +18,18 @@ const app = express();
 
 app.use(express.json());
 
+const employeeRoutes = require('./routes/employeeRoutes');
+app.use('/api/v1', employeeRoutes)
+
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/v1/user', userRoutes)
+
+const protectedRoute = require('./routes/protectedRoute');
+app.use('/protected', protectedRoute);
+
+
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`)
 })
 
-const routes = require('./routes/employeeRoutes');
-app.use('/api/v1', routes)
+
