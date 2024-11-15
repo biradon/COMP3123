@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "build": "echo 'No build step defined' && exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chau Minh Truong",
@@ -14,6 +15,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "mongoose": "^8.6.3",
+    "express-validator": "^6.15.0",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^3.1.7"
   }
 }
